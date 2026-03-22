@@ -1,0 +1,27 @@
+#ifndef GAME_H
+#define GAME_H
+
+#include "GraphicsDevice.h"
+#include "GameObject.h"
+#include "Time.h"
+
+class Game
+{
+public:
+	// Constructor and Destructor
+	Game();
+	~Game();
+
+	// Functions
+	bool Initialize(HWND hWnd);
+	void Run();
+	void Update(float gameTime);
+	void Draw(float gameTime);
+
+private:
+	GraphicsDevice* gDevice;
+	GameObject* player;
+	Time* time;
+};
+
+#endif // GAME_H

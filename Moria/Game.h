@@ -3,7 +3,9 @@
 
 #include "GraphicsDevice.h"
 #include "GameObject.h"
+#include "Sprite.h"
 #include "Time.h"
+#include "Player.h"
 
 class Game
 {
@@ -21,6 +23,7 @@ public:
 private:
 	GraphicsDevice* gDevice;
 	GameObject* player;
+	Sprite* background;
 	Time* time;
 };
 

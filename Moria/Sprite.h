@@ -3,6 +3,7 @@
 
 #include <d3dx9.h>
 #include <string>
+#include "Texture.h"
 
 class Sprite
 {
@@ -12,15 +13,14 @@ public:
 
 	// Constructors and Destructor
 	Sprite();
-	Sprite(float x, float y, float speeds);
 	~Sprite();
 
 	// Functions
-	bool Initialize(LPDIRECT3DDEVICE9 device, std::string file, int width, int height);
+	bool Initialize(LPDIRECT3DDEVICE9 device, std::wstring file, int width, int height);
 	bool IsInitialized();
 	virtual void Draw(float gameTime, D3DXVECTOR3 position);
 private:
-	LPDIRECT3DTEXTURE9 _texture;
+	Texture* _texture;
 	LPD3DXSPRITE _sprite;
 
 	// Atributes

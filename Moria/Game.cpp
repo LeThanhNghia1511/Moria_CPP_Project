@@ -1,18 +1,14 @@
-#include "Game.h"
+﻿#include "Game.h"
 
 Game::Game()
 {
 	// Constructor
+	player = nullptr;
+	background = nullptr;
 }
 
 Game::~Game()
 {
-	if (player)
-	{
-		delete player;
-		player = 0;
-	}
-
 	if (gDevice)
 	{
 		delete gDevice;
@@ -28,8 +24,12 @@ bool Game::Initialize(HWND hWnd)
 		return false;
 	}
 
-	player = new GameObject(100, 200, 90, 100.0f, 100.0f);
-	if (!player->Initialize(gDevice->device, "EggPlant.png", 64, 64))
+	player = new GameObject(100, 100, 0, 150.0f, 150.0f);
+	if (!player->Initialize(gDevice->device, L"EggPlant.png", 64, 64))
+		return false;
+
+	background = new Sprite();
+	if (!background->Initialize(gDevice->device, L"Forest_Background_0.png", 1280, 1080))
 	{
 		return false;
 	}
@@ -60,7 +60,6 @@ void Game::Update(float gameTime)
 		PostQuitMessage(0);
 	}
 
-	// Update sprites and other game logic 
 	if (player)
 	{
 		player->HandleInput();
@@ -72,14 +71,26 @@ void Game::Draw(float gameTime)
 {
 	// Use XRGB to draw background
 	gDevice->Clear(D3DCOLOR_XRGB(0, 100, 120));
-	gDevice->Begin();
-
-	// Draw the player
-	if (player)
+	if (gDevice->Begin())
 	{
-		player->Draw(gameTime);
-	}
+		LPD3DXSPRITE spriteHandler = GraphicsDevice::GetInstance()->GetSpriteHandler();
 
-	gDevice->End();
-	gDevice->Present();
+		spriteHandler->Begin(D3DXSPRITE_ALPHABLEND);
+
+
+		// Draw background image
+		if (background)
+		{
+			background->Draw(gameTime, D3DXVECTOR3(0, 0, 0));
+		}
+		if (player)
+		{
+			player->Draw(gameTime);
+		}
+
+		spriteHandler->End();
+
+		gDevice->End();
+		gDevice->Present();
+	}
 }

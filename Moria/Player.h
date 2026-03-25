@@ -13,14 +13,19 @@ private:
 	Animation* animWalk;
 	Animation* animJump;
 	Animation* currentAnim;
+
+	float _moveX;
+	float _moveY;
 	
 public:
 	// Functions
 	Player();
 	~Player();
 
-	void Update(float deltaTime);
+	bool Initialize(std::wstring path, int width, int height);
+	void Update(float gameTime);
 	void Draw(float gameTime);
-	bool Initialize(std::wstring path);
+	void HandleInput();
+	void Flip();
 };
 

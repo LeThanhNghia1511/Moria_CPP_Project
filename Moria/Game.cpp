@@ -24,8 +24,8 @@ bool Game::Initialize(HWND hWnd)
 		return false;
 	}
 
-	player = new GameObject(100, 100, 0, 150.0f, 150.0f);
-	if (!player->Initialize(gDevice->device, L"EggPlant.png", 64, 64))
+	player = new Player();
+	if (!player->Initialize(L"Player.png", 500, 500))
 		return false;
 
 	background = new Sprite();

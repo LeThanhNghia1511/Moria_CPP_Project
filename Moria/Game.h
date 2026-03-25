@@ -22,7 +22,7 @@ public:
 
 private:
 	GraphicsDevice* gDevice;
-	GameObject* player;
+	Player* player;
 	Sprite* background;
 	Time* time;
 };

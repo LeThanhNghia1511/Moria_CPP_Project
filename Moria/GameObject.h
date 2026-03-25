@@ -18,7 +18,6 @@ public:
 	~GameObject();
 
 	virtual bool Initialize(LPDIRECT3DDEVICE9 device, std::wstring file, int width, int height);
-	virtual void HandleInput();
 	virtual void Update(float gameTime);
 	virtual void Draw(float gameTime);
 
@@ -26,6 +25,7 @@ public:
 
 	void SetSpeed(float speed);
 protected:
+	Sprite* sprite;
 	// Informational data
 	std::string _name;
 	std::string _description;
@@ -35,11 +35,9 @@ protected:
 	D3DXVECTOR3 _velocity;
 	float _rotation;
 	float _speed;
+	float _maxSpeed;
 private:
 	ObjectStatus status;
-	Sprite* sprite;
-
-	float _maxSpeed;
 };
 
 #endif // GAMEPLAYOBJECT_H

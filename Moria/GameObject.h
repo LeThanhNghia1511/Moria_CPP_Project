@@ -5,6 +5,7 @@
 
 #include "Sprite.h"
 #include <string>
+#include "Input.h"
 
 enum class ObjectStatus {Active, Dying, Dead};
 
@@ -12,10 +13,11 @@ class GameObject
 {
 public:
 	// Constructor and Destructor
+	GameObject();
 	GameObject(float x, float y, float rotation, float speed, float maxSpeed);
 	~GameObject();
 
-	virtual bool Initialize(LPDIRECT3DDEVICE9 device, std::string file, int width, int height);
+	virtual bool Initialize(LPDIRECT3DDEVICE9 device, std::wstring file, int width, int height);
 	virtual void HandleInput();
 	virtual void Update(float gameTime);
 	virtual void Draw(float gameTime);

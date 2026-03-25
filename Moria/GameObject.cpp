@@ -1,5 +1,10 @@
 #include "GameObject.h"
 
+GameObject::GameObject()
+{
+
+}
+
 GameObject::GameObject(float x, float y, float rotation, float speed, float maxSpeed)
 {
 	float twoPi = (float)(M_PI * 2);
@@ -19,7 +24,7 @@ GameObject::GameObject(float x, float y, float rotation, float speed, float maxS
 	SetSpeed(speed);
 }
 
-bool GameObject::Initialize(LPDIRECT3DDEVICE9 device, std::string file, int width, int height)
+bool GameObject::Initialize(LPDIRECT3DDEVICE9 device, std::wstring file, int width, int height)
 {
 	status = ObjectStatus::Active;
 
@@ -37,24 +42,14 @@ bool GameObject::Initialize(LPDIRECT3DDEVICE9 device, std::string file, int widt
 void GameObject::HandleInput()
 {
 	D3DXVECTOR3 movement(0, 0, 0);
+	float moveX;
+	float moveY;
 
 	// Get key input
-	if (GetAsyncKeyState(VK_UP))
-	{
-		movement.y -= 1;
-	}
-	if (GetAsyncKeyState(VK_DOWN))
-	{
-		movement.y += 1;
-	}
-	if (GetAsyncKeyState(VK_LEFT))
-	{
-		movement.x -= 1;
-	}
-	if (GetAsyncKeyState(VK_RIGHT))
-	{
-		movement.x += 1;
-	}
+	moveY = Input::GetInstance()->GetAxis("Vertical");
+	moveX = Input::GetInstance()->GetAxis("Horizontal");
+	movement.x += moveX;
+	movement.y += moveY;
 
 	if (movement.x != 0 || movement.y != 0) // Is moving
 	{

@@ -1,4 +1,4 @@
-#include <windows.h>
+﻿#include <windows.h>
 #include "GraphicsDevice.h"
 #include "Sprite.h"
 #include "Game.h"
@@ -25,31 +25,32 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 {
 	HWND hWnd;
 
-	if (GenerateWindow(hInstance, nCmdShow, "Moria", "Window Title", 1280, 720, hWnd) && InitializeInput())
+	if (GenerateWindow(hInstance, nCmdShow, "Moria", "Window Title", 1280, 720, hWnd) &&
+		Input::GetInstance()->Initialize(hInstance, hWnd))
 	{
-		MSG msg;
 		game = new Game();
+		MSG msg = { 0 };
 		if (game->Initialize(hWnd))
 		{
 			while (true)
 			{
-				while (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE))
+				if (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE))
 				{
+					if (msg.message == WM_QUIT) break;
 					TranslateMessage(&msg);
 					DispatchMessage(&msg);
 				}
-				if (msg.message == WM_QUIT)
-					break;
 				else
 				{
-					// Update and Draw
+					Input::GetInstance()->Update();
 					game->Run();
 				}
 			}
 		}
 
+		Input::GetInstance()->Shutdown();
 		delete game;
-		return msg.wParam;
+		return (int)msg.wParam;
 	}
 	return 0;
 }
@@ -87,23 +88,6 @@ bool GenerateWindow(HINSTANCE hInstance, int nCmdShow, LPCSTR className, LPCSTR 
 	return true;
 }
 
-bool InitializeInput()
-{
-	RAWINPUTDEVICE rawInput[1];
-
-	rawInput[0].usUsagePage = 0x01;
-	rawInput[0].usUsage = 0x06;
-	rawInput[0].dwFlags = 0;
-	rawInput[0].hwndTarget = 0;
-
-	if (RegisterRawInputDevices(rawInput, 1, sizeof(rawInput[0])) == false)
-	{
-		return false;
-	}
-
-	return true;
-}
-
 LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	LRESULT result = NULL;
@@ -115,46 +99,6 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		PostQuitMessage(0);
 		return 0;
 	}break;
-	/*case WM_INPUT:
-	{
-		UINT dwSize;
-
-		GetRawInputData((HRAWINPUT)lParam, RID_INPUT, NULL, &dwSize, sizeof(RAWINPUTHEADER));
-
-		LPBYTE lpb = new BYTE[dwSize];
-
-		if (lpb == NULL)
-		{
-			return 0;
-		}
-
-		GetRawInputData((HRAWINPUT)lParam, RID_INPUT, lpb, &dwSize, sizeof(RAWINPUTHEADER));
-
-		RAWINPUT* raw = (RAWINPUT*)lpb;
-
-		if (raw->header.dwType == RIM_TYPEKEYBOARD)
-		{
-			if (raw->data.keyboard.Message == WM_KEYDOWN || raw->data.keyboard.Message == WM_SYSKEYDOWN)
-			{
-				std::string information =
-					"Make code - " + std::to_string(raw->data.keyboard.MakeCode) +
-					"; Flags - " + std::to_string(raw->data.keyboard.Flags) +
-					"; Reserved - " + std::to_string(raw->data.keyboard.Reserved) +
-					"; Extra Information - " + std::to_string(raw->data.keyboard.ExtraInformation) +
-					"; Message - " + std::to_string(raw->data.keyboard.Message) +
-					"; VKey - " + std::to_string(raw->data.keyboard.VKey) +
-					"\n";
-
-				OutputDebugString(information.c_str());
-
-				if (raw->data.keyboard.VKey == VK_AKEY)
-				{
-					MessageBox(NULL, "Space key was pressed", NULL, NULL);
-				}
-			}
-		}
-
-	}break;*/
 	default:
 	{
 		result = DefWindowProc(hwnd, uMsg, wParam, lParam);

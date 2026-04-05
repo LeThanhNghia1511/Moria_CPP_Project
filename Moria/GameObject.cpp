@@ -36,6 +36,7 @@ bool GameObject::Initialize(LPDIRECT3DDEVICE9 device, std::wstring file, int wid
 			return false;
 		}
 	}
+
 	return true;
 }
 

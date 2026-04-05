@@ -24,15 +24,15 @@ bool Game::Initialize(HWND hWnd)
 		return false;
 	}
 
-	player = new Player();
-	if (!player->Initialize(L"Player.png", 500, 500))
-		return false;
-
 	background = new Sprite();
 	if (!background->Initialize(gDevice->device, L"Forest_Background_0.png", 1280, 1080))
 	{
 		return false;
 	}
+
+	player = new Player();
+	if (!player->Initialize(L"Player.png", 960, 1440))
+		return false;
 
 	time = new Time();
 	if (!time->Initialize())

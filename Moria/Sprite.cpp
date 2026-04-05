@@ -26,24 +26,13 @@ bool Sprite::IsInitialized()
 
 void Sprite::Draw(float gameTime, D3DXVECTOR3 position)
 {
-    if (_texture)
-    {
-        RECT* srect = nullptr;
-        RECT tempRect;
-
-        if (_currentAnimation)
-        {
-            tempRect = _currentAnimation->GetCurrentFrame();
-            srect = &tempRect;
-        }
-
-        _texture->Render(
-            GraphicsDevice::GetInstance()->GetSpriteHandler(),
-            srect,
-            &position,
-            D3DCOLOR_XRGB(255, 255, 255)
-        );
-    }
+	// Draw the sprite
+	if (_sprite && _texture)
+	{
+		_sprite->Begin(D3DXSPRITE_ALPHABLEND);
+		_texture->Render(_sprite, NULL, &position, _color);
+		_sprite->End();
+	}
 }
 
 Sprite::~Sprite()

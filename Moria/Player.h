@@ -1,5 +1,5 @@
 #pragma once
-#include "Animation.h"
+#include "AnimationController.h"
 #include "Texture.h"
 #include "GameObject.h"
 #include "Input.h"
@@ -7,12 +7,8 @@
 class Player : public GameObject
 {
 private:
-	// Player states
-	Texture* texture;
-	Animation* animIdle;
-	Animation* animWalk;
-	Animation* animJump;
-	Animation* currentAnim;
+	// Player animation
+	AnimationController* animController;
 
 	float _moveX;
 	float _moveY;

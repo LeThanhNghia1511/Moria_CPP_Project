@@ -15,23 +15,9 @@ bool Player::Initialize(std::wstring path, int width, int height)
 {
 	GameObject::Initialize(GraphicsDevice::GetInstance()->device, path, width, height);
 
-	// Tao animation
-	Animation* idle = new Animation(0.1f);
-	idle->AddFrame(0, 0, 125, 80);   // Frame 1
-	idle->AddFrame(125, 0, 125, 80);   // Frame 1
-	idle->AddFrame(250, 0, 125, 80);   // Frame 1
-	idle->AddFrame(375, 0, 125, 80);   // Frame 1
-	sprite->AddAnimation("IDLE", idle);
-
-	Animation* walk = new Animation(0.1f);
-	sprite->AddAnimation("WALK", walk);
-	walk->AddFrame(0, 80, 125, 80); // Frame 1
-	walk->AddFrame(125, 80, 125, 80); // Frame 1
-	walk->AddFrame(250, 80, 125, 80); // Frame 1
-	walk->AddFrame(375, 80, 125, 80); // Frame 1
-
-	// Set default animation
-	sprite->Play("IDLE");
+	animController = new AnimationController(sprite->GetTexture(), 240, 240, 0.2f);
+	animController->AddClip(0, 4, 1.3f, "Idle");
+	animController->AddClip(1, 4, 1.0f, "Walk");
 
 	// Khởi tạo các thông số cho Player
 	_speed = 200.0f;
@@ -51,21 +37,20 @@ void Player::Update(float gameTime)
 	// Update animtion theo velocity
 	if (_velocity.x != 0 || _velocity.y != 0)
 	{
-		sprite->Play("WALK");
+		animController->ChangeClip("Walk");
 	}
 	else
 	{
-		sprite->Play("IDLE");
+		animController->ChangeClip("Idle");
 	}
-
-	// Cap nhat frame theo thoi gian
-	if (sprite)
-		sprite->Update(gameTime);
 }
 
 void Player::Draw(float gameTime)
 {
-	GameObject::Draw(gameTime);
+	if (animController)
+	{
+		animController->Play(_position);
+	}
 }
 
 void Player::HandleInput()

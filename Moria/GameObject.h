@@ -6,6 +6,7 @@
 #include "Sprite.h"
 #include <string>
 #include "Input.h"
+#include "AnimationController.h"
 
 enum class ObjectStatus {Active, Dying, Dead};
 

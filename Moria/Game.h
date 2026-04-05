@@ -22,8 +22,8 @@ public:
 
 private:
 	GraphicsDevice* gDevice;
-	Player* player;
 	Sprite* background;
+	Player* player;
 	Time* time;
 };
 

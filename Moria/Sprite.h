@@ -4,6 +4,7 @@
 #include <d3dx9.h>
 #include <string>
 #include "Texture.h"
+#include <map>
 
 class Sprite
 {
@@ -19,6 +20,7 @@ public:
 	bool Initialize(LPDIRECT3DDEVICE9 device, std::wstring file, int width, int height);
 	bool IsInitialized();
 	virtual void Draw(float gameTime, D3DXVECTOR3 position);
+	Texture* GetTexture() { return _texture; }	
 private:
 	Texture* _texture;
 	LPD3DXSPRITE _sprite;
@@ -26,7 +28,6 @@ private:
 	// Atributes
 	D3DCOLOR _color;
 	bool _initialized;
-	float _speed;
 };
 
 

@@ -10,8 +10,8 @@ bool Texture::Load(LPDIRECT3DDEVICE9 device, std::wstring filePath, int width, i
     HRESULT hr = D3DXCreateTextureFromFileExW(
         device,
         filePath.c_str(),      // Đường dẫn file (Unicode)
-        width,  // Chiều rộng (giữ nguyên gốc)
-        height,  // Chiều cao (giữ nguyên gốc)
+        width,   // <--- SỬA THÀNH CÁI NÀY
+        height,
         1, 0, D3DFMT_UNKNOWN, D3DPOOL_MANAGED,
         D3DX_FILTER_POINT, D3DX_FILTER_NONE,
         0,              // Color key (màu trong suốt, thường để 0 nếu file .png đã có alpha)

@@ -132,7 +132,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Animation.cpp" />
+    <ClCompile Include="AnimationClip.cpp" />
+    <ClCompile Include="AnimationController.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GraphicsDevice.cpp" />
@@ -145,7 +146,8 @@
     <ClCompile Include="Vector3.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Animation.h" />
+    <ClInclude Include="AnimationClip.h" />
+    <ClInclude Include="AnimationController.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GraphicsDevice.h" />

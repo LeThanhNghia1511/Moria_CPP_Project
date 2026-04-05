@@ -5,7 +5,6 @@ Sprite::Sprite()
 	// Set the color to white -> we can see the exactly shape of the image
 	_color = D3DCOLOR_ARGB(255, 255, 255, 255);
 	HRESULT hr = D3DXCreateSprite(GraphicsDevice::GetInstance()->device, &_sprite);
-	_speed = 0;
 
 	// Not initialize yet
 	_initialized = false;
@@ -14,7 +13,6 @@ Sprite::Sprite()
 
 bool Sprite::Initialize(LPDIRECT3DDEVICE9 device, std::wstring file, int width, int height)
 {
-	// This function is the same as D3DXCreateTextureFromFile Except the width and height are manually enterd
 	_texture->Load(device, file, width, height);
 
 	_initialized = true;
@@ -28,10 +26,11 @@ bool Sprite::IsInitialized()
 
 void Sprite::Draw(float gameTime, D3DXVECTOR3 position)
 {
+	// Draw the sprite
 	if (_sprite && _texture)
 	{
 		_sprite->Begin(D3DXSPRITE_ALPHABLEND);
-		_sprite->Draw(_texture->GetD3DTexture(), NULL, NULL, &position, _color);
+		_texture->Render(_sprite, NULL, &position, _color);
 		_sprite->End();
 	}
 }

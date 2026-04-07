@@ -1,31 +1,53 @@
-#include "Time.h"
+﻿#include "Time.h"
+
+Time* Time::_instance = nullptr;
+
+Time::Time()
+{
+    _deltaTime = 0;
+    _totalGameTime = 0;
+    _lastTime = 0;
+    _frequencyPerSeconds = 0;
+}
+
+Time* Time::GetInstance()
+{
+    if (!_instance)
+    {
+        _instance = new Time();
+        if (!_instance->Initialize())
+        {
+        }
+    }
+    return _instance;
+}
 
 bool Time::Initialize()
 {
-	LARGE_INTEGER i;
-	// Get frequency from counter, the frequency can not change while the system is running, so we just need to do this once
-	if (!QueryPerformanceFrequency(&i))
-	{
-		return false;
-	}
-	_frequencyPerSeconds = (float)(i.QuadPart);
+    LARGE_INTEGER freq;
+    if (!QueryPerformanceFrequency(&freq))
+        return false;
 
-	// Get the current value of the counter
-	QueryPerformanceCounter(&i);
-	_lastTime = i.QuadPart;
-	deltaTime = 0;
-	totalGameTime = 0;
+    _frequencyPerSeconds = (float)freq.QuadPart;
 
-	return true;
+    LARGE_INTEGER counter;
+    QueryPerformanceCounter(&counter);
+    _lastTime = counter.QuadPart;
+
+    return true;
 }
 
 void Time::Update()
 {
-	LARGE_INTEGER i;
+    Time* instance = GetInstance();
 
-	QueryPerformanceCounter(&i);
-	deltaTime = (float)(i.QuadPart - _lastTime) / _frequencyPerSeconds;
+    LARGE_INTEGER counter;
+    QueryPerformanceCounter(&counter);
 
-	_lastTime = i.QuadPart;
-	totalGameTime += deltaTime;
+    double elapsedTime = (double)(counter.QuadPart - instance->_lastTime);
+    //instance->_deltaTime = (float)(elapsedTime / (double)instance->_frequencyPerSeconds) * 300;
+    instance->_deltaTime = 0.016f;
+
+    instance->_lastTime = counter.QuadPart;
+    instance->_totalGameTime += instance->_deltaTime;
 }

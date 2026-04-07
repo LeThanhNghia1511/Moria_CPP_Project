@@ -11,9 +11,9 @@ Sprite::Sprite()
 	_texture = new Texture();
 }
 
-bool Sprite::Initialize(LPDIRECT3DDEVICE9 device, std::wstring file, int width, int height)
+bool Sprite::Initialize(LPDIRECT3DDEVICE9 device, std::wstring file)
 {
-	_texture->Load(device, file, width, height);
+	_texture->Load(device, file);
 
 	_initialized = true;
 	return true;
@@ -24,14 +24,11 @@ bool Sprite::IsInitialized()
 	return _initialized;
 }
 
-void Sprite::Draw(float gameTime, D3DXVECTOR3 position)
+void Sprite::Draw(LPD3DXSPRITE handler, D3DXVECTOR3 position)
 {
-	// Draw the sprite
-	if (_sprite && _texture)
+	if (_texture)
 	{
-		_sprite->Begin(D3DXSPRITE_ALPHABLEND);
-		_texture->Render(_sprite, NULL, &position, _color);
-		_sprite->End();
+		_texture->Render(handler, NULL, &position, _color);
 	}
 }
 

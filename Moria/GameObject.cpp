@@ -1,77 +1,50 @@
-#include "GameObject.h"
+﻿#include "GameObject.h"
 
 GameObject::GameObject()
 {
-
+	transform = new Transform(); // Tạo ra 1 cái duy nhất ở đây thôi
+	sprite = nullptr;
+	spriteHandler = nullptr;
 }
 
-GameObject::GameObject(float x, float y, float rotation, float speed, float maxSpeed)
+GameObject::GameObject(float x, float y)
 {
-	float twoPi = (float)(M_PI * 2);
-	_position.x = x;
-	_position.y = y;
-	_position.z = 0;
-
-	if (rotation > twoPi) rotation = twoPi;
-	if (rotation < 0) rotation = 0;
-
-	if (speed > maxSpeed) speed = maxSpeed;
-	if (speed < 0) speed = 0;
-
-	this->_rotation = rotation;
-	this->_maxSpeed = maxSpeed;
-
-	SetSpeed(speed);
+	transform = new Transform();
+	sprite = nullptr;        
+	spriteHandler = nullptr;
 }
 
 bool GameObject::Initialize(LPDIRECT3DDEVICE9 device, std::wstring file, int width, int height)
 {
-	status = ObjectStatus::Active;
-
 	if (!sprite)
 	{
+		spriteHandler = GraphicsDevice::GetInstance()->GetSpriteHandler();
 		sprite = new Sprite();
-		if (!sprite->Initialize(device, file, width, height))
+		if (!sprite->Initialize(device, file))
 		{
 			return false;
 		}
 	}
-
 	return true;
 }
 
-
-
-void GameObject::Update(float gameTime)
+void GameObject::Update()
 {
-	if (status == ObjectStatus::Active)
-	{
-		_position.x += _velocity.x * gameTime;
-		_position.y += _velocity.y * gameTime;
-		_position.z = 0;
-	}
 }
 
-void GameObject::Draw(float gameTime)
+void GameObject::Draw()
 {
-	if (sprite)
-		sprite->Draw(gameTime, _position);
-}
+	if (!sprite) return;
 
-ObjectStatus GameObject::GetStatus() const
-{
-	return status;
-}
+	D3DXMATRIX mat = transform->GetWorldMatrix();
+	spriteHandler->SetTransform(&mat);
 
-void GameObject::SetSpeed(float speed)
-{
-	if (speed >= 0 && speed <= _maxSpeed)
-	{
-		this->_speed = speed;
-		_velocity.x = cos(_rotation) * speed;
-		_velocity.y = sin(_rotation) * speed;
-		_velocity.z = 0;
-	}
+	GraphicsDevice::GetInstance()->device->SetSamplerState(0, D3DSAMP_MAGFILTER, D3DTEXF_POINT);
+	GraphicsDevice::GetInstance()->device->SetSamplerState(0, D3DSAMP_MINFILTER, D3DTEXF_POINT);
+
+	spriteHandler->Begin(D3DXSPRITE_ALPHABLEND);
+	this->Render(spriteHandler);
+	spriteHandler->End();
 }
 
 GameObject::~GameObject()

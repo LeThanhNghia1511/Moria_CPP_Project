@@ -4,7 +4,6 @@
 #include <d3d9.h>
 #include <d3dx9.h>
 #include <string>
-#include "Vector3.h"
 #include "GraphicsDevice.h"
 
 class Texture
@@ -16,13 +15,11 @@ public:
 	Texture();
 	~Texture();
 
-	bool Load(LPDIRECT3DDEVICE9 device, std::wstring filePath, int width, int height);
+	bool Load(LPDIRECT3DDEVICE9 device, std::wstring filePath);
 
-	void Render(LPD3DXSPRITE spriteHandler, RECT* sourceRect, D3DXVECTOR3* position, D3DCOLOR color = D3DCOLOR_XRGB(255, 255, 255));
+	void Render(LPD3DXSPRITE handler, RECT* srcRect, D3DXVECTOR3* position, D3DCOLOR color = D3DCOLOR_XRGB(255, 255, 255));
 	int GetWidth() { return _info.Width; }
 	int GetHeight() { return _info.Height; }
 	LPDIRECT3DTEXTURE9 GetD3DTexture() { return _texture; }
 };
-
-
 #endif

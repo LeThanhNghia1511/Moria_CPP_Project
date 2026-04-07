@@ -11,12 +11,6 @@ bool GenerateWindow(HINSTANCE hInstance, int nCmdShow, LPCSTR className, LPCSTR 
 
 LRESULT CALLBACK WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
-// Update and Draw
-void Update(float gameTime);
-void Draw(GraphicsDevice* gDevice, float gameTime);
-
-bool InitializeInput();
-
 // Game Pointer
 Game* game;
 

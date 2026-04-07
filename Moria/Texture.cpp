@@ -5,15 +5,16 @@ Texture::Texture()
 	_texture = nullptr;
 }
 
-bool Texture::Load(LPDIRECT3DDEVICE9 device, std::wstring filePath, int width, int height)
+bool Texture::Load(LPDIRECT3DDEVICE9 device, std::wstring filePath)
 {
     HRESULT hr = D3DXCreateTextureFromFileExW(
         device,
         filePath.c_str(),      // Đường dẫn file (Unicode)
-        width,   // <--- SỬA THÀNH CÁI NÀY
-        height,
+        D3DX_DEFAULT,
+        D3DX_DEFAULT,
         1, 0, D3DFMT_UNKNOWN, D3DPOOL_MANAGED,
-        D3DX_FILTER_POINT, D3DX_FILTER_NONE,
+        D3DX_FILTER_POINT,
+        D3DX_FILTER_POINT,
         0,              // Color key (màu trong suốt, thường để 0 nếu file .png đã có alpha)
         &_info,          // Lưu thông tin ảnh vào biến info
         NULL,
@@ -23,15 +24,34 @@ bool Texture::Load(LPDIRECT3DDEVICE9 device, std::wstring filePath, int width, i
     return SUCCEEDED(hr);
 }
 
-void Texture::Render(LPD3DXSPRITE spriteHandler, RECT* sourceRect, D3DXVECTOR3* position, D3DCOLOR color)
+void Texture::Render(LPD3DXSPRITE handler, RECT* srcRect, D3DXVECTOR3* position, D3DCOLOR color)
 {
-    spriteHandler->Draw(
-        _texture,
-        sourceRect,    // Cắt ảnh ở đây
-        NULL,          // Center (thường để NULL để lấy góc trên trái 0,0 làm gốc)
-        position,      // Vị trí trên màn hình
-        color          // Màu hòa trộn (trắng = giữ nguyên gốc)
-    );
+    if (handler && _texture)
+    {
+        // Tinh toan vi tri trung tam (cua sprite)
+        D3DXVECTOR3 center(0, 0, 0);
+
+        // GameObj co animation
+        if (srcRect != nullptr) {
+            center.x = (float)(srcRect->right - srcRect->left) / 2.0f;
+            center.y = (float)(srcRect->bottom - srcRect->top) / 2.0f;
+        }
+        // GameObj tinh, ko co animation (anh ko bi cat)
+        else {
+            center.x = (float)_info.Width / 2.0f;
+            center.y = (float)_info.Height / 2.0f;
+        }
+
+        // Vi tri ve GameObj
+        D3DXVECTOR3 pos;
+        if (position != nullptr)
+            pos = *position;
+        else
+            pos = D3DXVECTOR3(0, 0, 0);
+
+        // Goi lenh ve
+        handler->Draw(_texture, srcRect, &center, &pos, color);
+    }
 }
 
 

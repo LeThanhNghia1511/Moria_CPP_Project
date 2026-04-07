@@ -24,35 +24,27 @@ bool Game::Initialize(HWND hWnd)
 		return false;
 	}
 
-	background = new Sprite();
-	if (!background->Initialize(gDevice->device, L"Forest_Background_0.png", 1280, 1080))
-	{
-		return false;
-	}
+	//background = new GameObject();
+	//if (!background->Initialize(gDevice->device, L"Forest_Background_0.png"))
+	//{
+	//	return false;
+	//}
 
-	player = new Player();
-	if (!player->Initialize(L"Player.png", 960, 1440))
+	player = new Player(50, 50, 0);
+	if (!player->Initialize(L"Player.png", 192, 288))
 		return false;
-
-	time = new Time();
-	if (!time->Initialize())
-	{
-		return false;
-	}
 
 	return true;
 }
 
 void Game::Run()
 {
-	// Get game time and Update + Draw
-	time->Update();
-
-	Update(time->deltaTime);
-	Draw(time->deltaTime);
+	Time::Update();
+	Update();
+	Draw();
 }
 
-void Game::Update(float gameTime)
+void Game::Update()
 {
 	// Input
 	if (GetAsyncKeyState(VK_SPACE))
@@ -62,33 +54,25 @@ void Game::Update(float gameTime)
 
 	if (player)
 	{
-		player->HandleInput();
-		player->Update(gameTime);
+		player->Update();
 	}
 }
 
-void Game::Draw(float gameTime)
+void Game::Draw()
 {
 	// Use XRGB to draw background
 	gDevice->Clear(D3DCOLOR_XRGB(0, 100, 120));
 	if (gDevice->Begin())
 	{
-		LPD3DXSPRITE spriteHandler = GraphicsDevice::GetInstance()->GetSpriteHandler();
-
-		spriteHandler->Begin(D3DXSPRITE_ALPHABLEND);
-
-
 		// Draw background image
 		if (background)
 		{
-			background->Draw(gameTime, D3DXVECTOR3(0, 0, 0));
+			//background->Draw(D3DXVECTOR3(0, 0, 0));
 		}
 		if (player)
 		{
-			player->Draw(gameTime);
+			player->Draw();
 		}
-
-		spriteHandler->End();
 
 		gDevice->End();
 		gDevice->Present();

@@ -1,9 +1,8 @@
 ﻿#include "AnimationController.h"
 
-AnimationController::AnimationController(Texture* texture, int width, int height, float gameTime)
+AnimationController::AnimationController(Texture* texture, int width, int height)
 {
 	this->texture = texture;
-	this->gameTime = gameTime;
 	this->width = width;
 	this->height = height;
 	currentClip = nullptr;
@@ -21,7 +20,7 @@ AnimationController::~AnimationController()
 void AnimationController::AddClip(int clipIndex, int totalFrame, float frameTime, std::string clipName)
 {
 
-	AnimationClip* newClip = new AnimationClip{ texture, clipIndex, totalFrame, frameTime, width, height };
+	AnimationClip* newClip = new AnimationClip(texture, clipIndex, totalFrame, frameTime, width, height);
 	animationClips.insert({ clipName, newClip });
 
 	if (_isFirstClipCreated == false)
@@ -31,12 +30,12 @@ void AnimationController::AddClip(int clipIndex, int totalFrame, float frameTime
 	}
 }
 
-void AnimationController::Play(D3DXVECTOR3 position)
+void AnimationController::Play(LPD3DXSPRITE spriteHandler, D3DXVECTOR3 position)
 {
 	if (currentClip)
 	{
-		currentClip->Update(gameTime);
-		currentClip->Render(GraphicsDevice::GetInstance()->GetSpriteHandler(), position);
+		currentClip->Update();
+		currentClip->Render(spriteHandler, position);
 	}
 }
 

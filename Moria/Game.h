@@ -3,7 +3,6 @@
 
 #include "GraphicsDevice.h"
 #include "GameObject.h"
-#include "Sprite.h"
 #include "Time.h"
 #include "Player.h"
 
@@ -17,14 +16,13 @@ public:
 	// Functions
 	bool Initialize(HWND hWnd);
 	void Run();
-	void Update(float gameTime);
-	void Draw(float gameTime);
+	void Update();
+	void Draw();
 
 private:
 	GraphicsDevice* gDevice;
-	Sprite* background;
+	GameObject* background;
 	Player* player;
-	Time* time;
 };
 
 #endif // GAME_H

@@ -2,7 +2,16 @@
 
 Player::Player()
 {
+	_speed = 50;
+}
 
+Player::Player(float x, float y, float z) : GameObject()
+{
+	_speed = 70;
+	this->transform->position = D3DXVECTOR3(x, y, z);
+	this->transform->scale = D3DXVECTOR3(3.0f, 3.0f, 3.0f); // Hiện hình!
+
+	sprite = nullptr;
 }
 
 Player::~Player()
@@ -15,41 +24,26 @@ bool Player::Initialize(std::wstring path, int width, int height)
 {
 	GameObject::Initialize(GraphicsDevice::GetInstance()->device, path, width, height);
 
-	animController = new AnimationController(sprite->GetTexture(), 240, 240, 0.2f);
-	animController->AddClip(0, 4, 1.3f, "Idle");
-	animController->AddClip(1, 4, 1.0f, "Walk");
-
-	// Khởi tạo các thông số cho Player
-	_speed = 200.0f;
-	_maxSpeed = 500.0f;
+	animController = new AnimationController(sprite->GetTexture(), 64, 86);
+	animController->AddClip(0, 4, 0.1f, "Idle");
+	animController->AddClip(1, 4, 0.1f, "Walk");
 
 	return true;
 }
 
-void Player::Update(float gameTime)
+void Player::Update()
 {
-	// Xu li input cua nguoi choi
 	HandleInput();
-
-	// Xu li di chuyen cua gameobj
-	GameObject::Update(gameTime);
-
-	// Update animtion theo velocity
-	if (_velocity.x != 0 || _velocity.y != 0)
-	{
-		animController->ChangeClip("Walk");
-	}
-	else
-	{
-		animController->ChangeClip("Idle");
-	}
+	HandleMovement();
+	HandleAnimations();
 }
 
-void Player::Draw(float gameTime)
+void Player::Render(LPD3DXSPRITE spriteHandler)
 {
 	if (animController)
 	{
-		animController->Play(_position);
+		D3DXVECTOR3 testPos(0, 0, 0);
+		animController->Play(spriteHandler, testPos);
 	}
 }
 
@@ -77,10 +71,37 @@ void Player::HandleInput()
 	}
 }
 
+void Player::HandleMovement()
+{
+	transform->position.x += _velocity.x * Time::GetDeltaTime();
+	transform->position.y += _velocity.y * Time::GetDeltaTime();
+
+	if (_moveX != 0)
+		Flip();
+}
+
+void Player::HandleAnimations()
+{
+	// Update animation theo velocity
+	if (_velocity.x != 0 || _velocity.y != 0)
+	{
+		animController->ChangeClip("Walk");
+	}
+	else
+	{
+		animController->ChangeClip("Idle");
+	}
+}
+
 void Player::Flip()
 {
 	if (_moveX < 0) // Facing left
 	{
+		this->transform->scale.x = -3; // Flip horizontally
+	}
 
+	else if (_moveX > 0) // Facing right
+	{
+		this->transform->scale.x = 3; // Normal scale
 	}
 }

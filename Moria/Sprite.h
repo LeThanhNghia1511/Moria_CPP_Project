@@ -17,9 +17,9 @@ public:
 	~Sprite();
 
 	// Functions
-	bool Initialize(LPDIRECT3DDEVICE9 device, std::wstring file, int width, int height);
+	bool Initialize(LPDIRECT3DDEVICE9 device, std::wstring file);
 	bool IsInitialized();
-	virtual void Draw(float gameTime, D3DXVECTOR3 position);
+	virtual void Draw(LPD3DXSPRITE handler, D3DXVECTOR3 position);
 	Texture* GetTexture() { return _texture; }	
 private:
 	Texture* _texture;

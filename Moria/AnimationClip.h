@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include "Texture.h"
+#include "Time.h"
 #include <windows.h>
 
 class AnimationClip
@@ -19,7 +20,6 @@ public:
 	~AnimationClip();
 
 	void AddFrame(int index, int totalFrame, int width, int height);
-	void Update(float frameTime);
+	void Update();
 	void Render(LPD3DXSPRITE spriteHandler, D3DXVECTOR3 position);
-	RECT GetCurrentFrame();
 };

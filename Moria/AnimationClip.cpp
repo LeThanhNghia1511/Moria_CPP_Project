@@ -1,10 +1,11 @@
-#include "AnimationClip.h"
+﻿#include "AnimationClip.h"
 
 AnimationClip::AnimationClip(Texture* texture, int clipIndex, int totalFrame, float frameTime, int width, int height)
 {
 	this->frameTime = frameTime;
 	this->texture = texture;
 	this->timer = 0;
+	this->currentFrame = 0;
 
 	AddFrame(clipIndex, totalFrame, width, height);
 }
@@ -27,11 +28,16 @@ void AnimationClip::AddFrame(int index, int totalFrame, int width, int height)
 	}
 }
 
-void AnimationClip::Update(float frameTime)
+void AnimationClip::Update()
 {
 	if (frames.size() <= 1) return; // If there is only 1 frame, no need to update
-	timer += frameTime;
-	if (timer >= this->frameTime)
+	timer += Time::GetDeltaTime();
+	std::string s = "DeltaTime hien tai: " + std::to_string(timer) + "\n";
+
+	// Lệnh in ra cửa sổ Output (nằm dưới cùng của VS)
+	OutputDebugStringA(s.c_str());
+
+	if (timer >= frameTime)
 	{
 		timer = 0;
 		currentFrame = (currentFrame + 1) % frames.size();
@@ -40,8 +46,9 @@ void AnimationClip::Update(float frameTime)
 
 void AnimationClip::Render(LPD3DXSPRITE spriteHandler, D3DXVECTOR3 position)
 {
-	if (texture && frames.size() > 0) {
-		RECT frame = frames[this->currentFrame];
-		texture->Render(spriteHandler, &frame, &position);
+	if (texture != nullptr && !frames.empty())
+	{
+		RECT currentFrame = frames[this->currentFrame];
+		texture->Render(spriteHandler, &currentFrame, &position);
 	}
 }

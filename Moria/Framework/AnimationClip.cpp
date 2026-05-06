@@ -32,10 +32,6 @@ void AnimationClip::Update()
 {
 	if (frames.size() <= 1) return; // If there is only 1 frame, no need to update
 	timer += Time::GetDeltaTime();
-	std::string s = "DeltaTime hien tai: " + std::to_string(timer) + "\n";
-
-	// Lệnh in ra cửa sổ Output (nằm dưới cùng của VS)
-	OutputDebugStringA(s.c_str());
 
 	if (timer >= frameTime)
 	{

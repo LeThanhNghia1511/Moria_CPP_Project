@@ -1,32 +1,47 @@
 ﻿#include "Player.h"
 
-Player::Player()
+Player::Player() : GameObject()
 {
-	_speed = 50;
+	_speed = 100;
+	_moveX = 0;
+	_moveY = 0;
+	_isFacingRight = true;
+	sprite = nullptr;
+	animController = nullptr;
 }
 
-Player::Player(float x, float y, float z) : GameObject()
+Player::Player(float x, float y, float z) : GameObject(x, y, z)
 {
-	_speed = 70;
-	this->transform->position = D3DXVECTOR3(x, y, z);
-	this->transform->scale = D3DXVECTOR3(3.0f, 3.0f, 3.0f); // Hiện hình!
-
+	_speed = 100;
+	_moveX = 0;
+	_moveY = 0;
+	
+	_isFacingRight = true;
 	sprite = nullptr;
+	animController = nullptr;
 }
 
 Player::~Player()
 {
-
+	if (animController)
+	{
+		delete animController;
+		animController = nullptr;
+	}
 }
 
 
 bool Player::Initialize(std::wstring path, int width, int height)
 {
-	GameObject::Initialize(GraphicsDevice::GetInstance()->device, path, width, height);
+	if (!GameObject::Initialize(path, width, height))
+		return false;
 
-	animController = new AnimationController(sprite->GetTexture(), 64, 86);
-	animController->AddClip(0, 4, 0.1f, "Idle");
-	animController->AddClip(1, 4, 0.1f, "Walk");
+	if (sprite != nullptr)
+	{
+		animController = new AnimationController(sprite->GetTexture(), 48, 48);
+		animController->AddClip(0, 4, 0.1f, "Idle");
+		animController->AddClip(1, 4, 0.1f, "Walk");
+	}
 
 	return true;
 }
@@ -42,8 +57,8 @@ void Player::Render(LPD3DXSPRITE spriteHandler)
 {
 	if (animController)
 	{
-		D3DXVECTOR3 testPos(0, 0, 0);
-		animController->Play(spriteHandler, testPos);
+		D3DXVECTOR3 pos = D3DXVECTOR3(0, 0, 0);
+		animController->Play(spriteHandler, pos);
 	}
 }
 
@@ -95,13 +110,15 @@ void Player::HandleAnimations()
 
 void Player::Flip()
 {
-	if (_moveX < 0) // Facing left
+	if (_moveX < 0 && _isFacingRight) // ->Facing left
 	{
-		this->transform->scale.x = -3; // Flip horizontally
+		_isFacingRight = false;
+		this->transform->scale.x *= -1; // Flip horizontally
 	}
 
-	else if (_moveX > 0) // Facing right
+	else if (_moveX > 0 && !_isFacingRight) // ->Facing right
 	{
-		this->transform->scale.x = 3; // Normal scale
+		_isFacingRight = true;
+		this->transform->scale.x *= -1; // Normal scale
 	}
 }

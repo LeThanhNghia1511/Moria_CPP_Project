@@ -19,83 +19,258 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="Moria.aps" />
+    <None Include="Assets\.DS_Store" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GraphicsDevice.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Sprite.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Game.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GameObject.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Time.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Input.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Texture.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Player.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="AnimationController.cpp">
+    <ClCompile Include="Framework\AnimationClip.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="AnimationClip.cpp">
+    <ClCompile Include="Framework\AnimationController.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Transform.cpp">
+    <ClCompile Include="Framework\GameObject.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\GraphicsDevice.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Input.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Sprite.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Texture.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Time.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Transform.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Game.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Bird1.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Collider.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Rigidbody.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsWorld.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="GraphicsDevice.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Sprite.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Game.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="GameObject.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Time.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Input.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Texture.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="AnimationController.h">
+    <ClInclude Include="Framework\AnimationClip.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="AnimationClip.h">
+    <ClInclude Include="Framework\AnimationController.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Transform.h">
+    <ClInclude Include="Framework\Game.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\GameObject.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\GraphicsDevice.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Input.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Sprite.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Texture.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Time.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Transform.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Bird1.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Collider.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Rigidbody.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsWorld.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="..\..\EggPlant.png">
-      <Filter>Assets</Filter>
+    <Image Include="Assets\Axe_Trap.png">
+      <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="Assets\Bird_1.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Assets\Bird_2.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Assets\Bouncepad_Green.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Assets\Bouncepad_Red.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Assets\Bouncepad_Wood.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Assets\Brick_Oneway.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Assets\Brick_Tileset.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Assets\Bridge.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Assets\Castle_Background_0.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Assets\Circular_Saw.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Assets\Cloud_Tileset.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Assets\Clouds.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Assets\Coin.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Assets\Coins_Ui.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Assets\EggPlant.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Assets\Fish_1.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Assets\Fish_2.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Assets\Flame_1.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Assets\Flame_2.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Assets\Forest_Background_0.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Assets\Grass_Oneway.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Assets\Grass_Rock_Oneway.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Assets\Grass_Rock_Tileset.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Assets\Grass_Tileset.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Assets\Ladder.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Assets\Lava.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Assets\Leaf_Tileset.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Assets\Logo.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Assets\Platform.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Assets\Player.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Assets\Rails.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Assets\Rope.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Assets\Sky_Background_0.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Assets\Sky_Background_1.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Assets\Sky_Background_2.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Assets\Spider_1.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Assets\Spider_2.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Assets\Spike.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Assets\Spike_Block.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Assets\Spike_Platform.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Assets\Star_Green.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Assets\Star_Red.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Assets\Star_Yellow.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Assets\Stars_Ui.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Assets\Stone_Tileset.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Assets\Vine.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Assets\Water.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Moria.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="Assets\Round9x13.ttf" />
   </ItemGroup>
 </Project>

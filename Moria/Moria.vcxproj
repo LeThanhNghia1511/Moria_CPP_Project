@@ -107,6 +107,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>C:\Users\nghia\OneDrive\Desktop\Moria_SE102_Q23\Moria\Framework;C:\Users\nghia\OneDrive\Desktop\Moria_SE102_Q23\Moria;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -129,37 +130,100 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <None Include="Assets\.DS_Store" />
+    <None Include="Moria.aps" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="AnimationClip.cpp" />
-    <ClCompile Include="AnimationController.cpp" />
-    <ClCompile Include="Game.cpp" />
-    <ClCompile Include="GameObject.cpp" />
-    <ClCompile Include="GraphicsDevice.cpp" />
-    <ClCompile Include="Input.cpp" />
-    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Bird1.cpp" />
+    <ClCompile Include="Framework\Collider.cpp" />
+    <ClCompile Include="Framework\AnimationClip.cpp" />
+    <ClCompile Include="Framework\AnimationController.cpp" />
+    <ClCompile Include="Framework\Game.cpp" />
+    <ClCompile Include="Framework\GameObject.cpp" />
+    <ClCompile Include="Framework\GraphicsDevice.cpp" />
+    <ClCompile Include="Framework\Input.cpp" />
+    <ClCompile Include="Framework\Main.cpp" />
+    <ClCompile Include="Framework\Sprite.cpp" />
+    <ClCompile Include="Framework\Texture.cpp" />
+    <ClCompile Include="Framework\Time.cpp" />
+    <ClCompile Include="Framework\Transform.cpp" />
+    <ClCompile Include="PhysicsWorld.cpp" />
     <ClCompile Include="Player.cpp" />
-    <ClCompile Include="Sprite.cpp" />
-    <ClCompile Include="Texture.cpp" />
-    <ClCompile Include="Time.cpp" />
-    <ClCompile Include="Transform.cpp" />
+    <ClCompile Include="Rigidbody.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AnimationClip.h" />
-    <ClInclude Include="AnimationController.h" />
-    <ClInclude Include="Game.h" />
-    <ClInclude Include="GameObject.h" />
-    <ClInclude Include="GraphicsDevice.h" />
-    <ClInclude Include="Input.h" />
+    <ClInclude Include="Bird1.h" />
+    <ClInclude Include="Framework\Collider.h" />
+    <ClInclude Include="Framework\AnimationClip.h" />
+    <ClInclude Include="Framework\AnimationController.h" />
+    <ClInclude Include="Framework\Game.h" />
+    <ClInclude Include="Framework\GameObject.h" />
+    <ClInclude Include="Framework\GraphicsDevice.h" />
+    <ClInclude Include="Framework\Input.h" />
+    <ClInclude Include="Framework\Sprite.h" />
+    <ClInclude Include="Framework\Texture.h" />
+    <ClInclude Include="Framework\Time.h" />
+    <ClInclude Include="Framework\Transform.h" />
+    <ClInclude Include="PhysicsWorld.h" />
     <ClInclude Include="Player.h" />
-    <ClInclude Include="Sprite.h" />
-    <ClInclude Include="Texture.h" />
-    <ClInclude Include="Time.h" />
-    <ClInclude Include="Transform.h" />
+    <ClInclude Include="Rigidbody.h" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="..\..\EggPlant.png" />
+    <Image Include="Assets\Axe_Trap.png" />
+    <Image Include="Assets\Bird_1.png" />
+    <Image Include="Assets\Bird_2.png" />
+    <Image Include="Assets\Bouncepad_Green.png" />
+    <Image Include="Assets\Bouncepad_Red.png" />
+    <Image Include="Assets\Bouncepad_Wood.png" />
+    <Image Include="Assets\Brick_Oneway.png" />
+    <Image Include="Assets\Brick_Tileset.png" />
+    <Image Include="Assets\Bridge.png" />
+    <Image Include="Assets\Castle_Background_0.png" />
+    <Image Include="Assets\Circular_Saw.png" />
+    <Image Include="Assets\Clouds.png" />
+    <Image Include="Assets\Cloud_Tileset.png" />
+    <Image Include="Assets\Coin.png" />
+    <Image Include="Assets\Coins_Ui.png" />
+    <Image Include="Assets\EggPlant.png" />
+    <Image Include="Assets\Fish_1.png" />
+    <Image Include="Assets\Fish_2.png" />
+    <Image Include="Assets\Flame_1.png" />
+    <Image Include="Assets\Flame_2.png" />
+    <Image Include="Assets\Forest_Background_0.png" />
+    <Image Include="Assets\Grass_Oneway.png" />
+    <Image Include="Assets\Grass_Rock_Oneway.png" />
+    <Image Include="Assets\Grass_Rock_Tileset.png" />
+    <Image Include="Assets\Grass_Tileset.png" />
+    <Image Include="Assets\Ladder.png" />
+    <Image Include="Assets\Lava.png" />
+    <Image Include="Assets\Leaf_Tileset.png" />
+    <Image Include="Assets\Logo.png" />
+    <Image Include="Assets\Platform.png" />
+    <Image Include="Assets\Player.png" />
+    <Image Include="Assets\Rails.png" />
+    <Image Include="Assets\Rope.png" />
+    <Image Include="Assets\Sky_Background_0.png" />
+    <Image Include="Assets\Sky_Background_1.png" />
+    <Image Include="Assets\Sky_Background_2.png" />
+    <Image Include="Assets\Spider_1.png" />
+    <Image Include="Assets\Spider_2.png" />
+    <Image Include="Assets\Spike.png" />
+    <Image Include="Assets\Spike_Block.png" />
+    <Image Include="Assets\Spike_Platform.png" />
+    <Image Include="Assets\Stars_Ui.png" />
+    <Image Include="Assets\Star_Green.png" />
+    <Image Include="Assets\Star_Red.png" />
+    <Image Include="Assets\Star_Yellow.png" />
+    <Image Include="Assets\Stone_Tileset.png" />
+    <Image Include="Assets\Vine.png" />
+    <Image Include="Assets\Water.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Moria.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="Assets\Round9x13.ttf" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
